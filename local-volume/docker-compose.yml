@@ -1,0 +1,16 @@
+---
+# Define a local volume with a custom path, for use in many containers (DRY)
+services:
+  test:
+    image: alpine:latest
+    command: ls -la /storage
+    volumes:
+      - storage:/storage
+
+volumes:
+  storage:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./storage

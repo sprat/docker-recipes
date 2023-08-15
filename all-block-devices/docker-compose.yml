@@ -1,0 +1,13 @@
+---
+# Give access to all the block devices to a container without giving the full privileges
+services:
+  test:
+    image: alpine:latest
+    command: dd if=/dev/${DEVICE:-sda1} of=/tmp/myfile bs=1M count=1
+    volumes:
+      - /dev:/dev
+    device_cgroup_rules:
+      - 'b *:* rwm'
+      # We can be more specific by listing the allowed major/minor numbers
+      # See https://www.kernel.org/doc/Documentation/admin-guide/devices.txt for a list
+      # e.g. 'b 8:* rwm'
