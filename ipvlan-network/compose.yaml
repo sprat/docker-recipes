@@ -1,0 +1,23 @@
+---
+# Declare a service with on a ipvlan network, so that the container is visible from the outside
+# It's an alternative to host network
+services:
+  test:
+    image: busybox:latest
+    command:
+      - sh
+      - -c
+      - ip addr show eth0 && ip route && ping -c 1 10.66.0.1 && ping -c 1 1.1.1.1
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    driver: ipvlan
+    driver_opts:
+      parent: ${INTERFACE:-eth0}
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.66.0.0/16
+          gateway: 10.66.0.1
