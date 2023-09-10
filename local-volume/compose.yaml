@@ -2,7 +2,7 @@
 # Define a local volume with a custom path, for use in many containers (DRY)
 services:
   test:
-    image: alpine:latest
+    image: busybox:latest
     command: ls -la /storage
     volumes:
       - storage:/storage

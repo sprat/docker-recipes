@@ -2,7 +2,7 @@
 # Give access to all the block devices to a container without giving the full privileges
 services:
   test:
-    image: alpine:latest
+    image: busybox:latest
     command: dd if=/dev/${DEVICE:-sda1} of=/tmp/myfile bs=1M count=1
     volumes:
       - /dev:/dev
