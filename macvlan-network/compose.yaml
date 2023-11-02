@@ -7,10 +7,10 @@ services:
     command:
       - sh
       - -c
-      - ip addr show eth0 && ip route && ping -c 1 10.66.0.1 && ping -c 1 1.1.1.1
+      - ip addr show eth0 && ip route && ping -c 1 ${GATEWAY:-10.66.0.1} && ping -c 1 1.1.1.1
     networks:
       mynet:
-        ipv4_address: 10.66.77.88
+        ipv4_address: ${IP:-10.66.77.88}
 
 networks:
   mynet:
@@ -20,5 +20,5 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 10.66.0.0/16
-          gateway: 10.66.0.1
+        - subnet: ${SUBNET:-10.66.0.0/16}
+          gateway: ${GATEWAY:-10.66.0.1}
