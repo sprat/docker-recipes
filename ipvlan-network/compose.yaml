@@ -9,8 +9,7 @@ services:
       - -c
       - ip addr show eth0 && ip route && ping -c 1 ${GATEWAY:-10.66.0.1} && ping -c 1 1.1.1.1
     networks:
-      mynet:
-        ipv4_address: ${IP:-10.66.77.88}
+      - mynet
 
 networks:
   mynet:
@@ -21,3 +20,4 @@ networks:
       config:
         - subnet: ${SUBNET:-10.66.0.0/16}
           gateway: ${GATEWAY:-10.66.0.1}
+          ip_range: ${IP_RANGE:-10.66.1.0/24}
