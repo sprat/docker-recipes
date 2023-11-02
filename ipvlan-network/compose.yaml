@@ -7,7 +7,7 @@ services:
     command:
       - sh
       - -c
-      - ip addr show eth0 && ip route && ping -c 1 ${GATEWAY:-10.66.0.1} && ping -c 1 1.1.1.1
+      - ip addr show eth0 && ip route && ping -c1 ${GATEWAY:-10.66.0.1} && ping -c1 1.1.1.1
     networks:
       - mynet
 
