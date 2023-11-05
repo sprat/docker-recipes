@@ -1,0 +1,24 @@
+x-base: &base
+  image: nonroot-volume
+  build: .
+
+services:
+  internal:
+    <<: *base
+
+  volume:
+    <<: *base
+    volumes:
+      - data:/app
+
+  bind:
+    <<: *base
+    volumes:
+      - ./data:/app
+
+  user:
+    <<: *base
+    user: 405:100
+
+volumes:
+  data: {}
